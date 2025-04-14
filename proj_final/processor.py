@@ -37,8 +37,8 @@ def transcribe_audio(audio_path):
     transcript = result["text"]
     return transcript
 
-def summarize_text(text):
-    prompt = f"Summarize the following transcript:\n\n{text}"
+def summarize_text(text, context_type="General Users"):
+    prompt = f"You are summarizing for a user type: {context_type}. Summarize this transcript accordingly:\n\n{text}"
     response = model.generate_content(prompt)
     print("🧠 Gemini response (raw):", response)
     return response.text.strip()

@@ -14,6 +14,7 @@ def home():
 @app.route("/upload", methods=["POST"])
 def upload_audio():
     file = request.files.get("file")
+    context_type = request.form.get("context", "General Users")
     if file is None:
         return "No file found in request", 400
 
@@ -24,7 +25,7 @@ def upload_audio():
     try:
         wav_path = convert_to_wav(filepath)
         transcription = transcribe_audio(wav_path)
-        summary = summarize_text(transcription)
+        summary = summarize_text(transcription, context_type)
         return jsonify({"transcript": transcription, "summary": summary})
     except Exception as e:
         print("🔥 Error in processing:", e)
@@ -34,8 +35,10 @@ def upload_audio():
 @app.route("/qa", methods=["POST"])
 def qa():
     data = request.json
-    answer = answer_question(data["context"], data["question"])
+    context_type = data.get("user_type", "General Users")
+    answer = answer_question(data["context"], data["question"], context_type)
     return jsonify({"answer": answer})
 
 if __name__ == "__main__":
     app.run(debug=True)
+
