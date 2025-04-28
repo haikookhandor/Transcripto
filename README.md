@@ -60,7 +60,7 @@ transcripto/
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/yourusername/transcripto.git
+git clone https://github.com/haikookhandor/transcripto.git
 cd transcripto
 ```
 
