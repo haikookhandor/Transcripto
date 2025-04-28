@@ -1,0 +1,9 @@
+flet
+flask
+requests
+werkzeug
+pydub
+transformers
+whisper
+torch
+google-generativeai
